@@ -1,0 +1,37 @@
+BCD3_2017																							
+Model:																							
+Modeler_name:																							
+Simulation																							
+Site:																							
+Model	Info	Year	Yield	Biom-an	Biom-ma	MaxLAI	Ant	Mat	Nleac	WDrain	CroN-an	CroN-ma	GrainN	GNumber	CumET	Nmin	Nvol	Nimmo	Nden	SoilAvW	SoilN	PET	Transp
+CodeN	level	season	(t/ha)	(t/ha)	(t/ha)	(-)	(DOY)	(DOY)	kgN/ha	(mm)	kgN/ha	kgN/ha	kgN/ha	(/m2)	(mm)	kgN/ha	kgN/ha	kgN/ha	kgN/ha	(mm)	kgN/ha	(mm)	(mm)
+na	na	1981	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1982	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1983	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1984	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1985	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1986	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1987	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1988	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1989	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1990	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1991	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1992	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1993	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1994	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1995	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1996	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1997	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1998	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	1999	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2000	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2001	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2002	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2003	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2004	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2005	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2006	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2007	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2008	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2009	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na
+na	na	2010	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na	na

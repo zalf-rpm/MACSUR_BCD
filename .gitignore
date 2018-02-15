@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+/BCD3/simulation/climate_FI_Test.csv
+/BCD3/out
+/BCD3/.idea/BCD3.iml
+/BCD3/.idea/misc.xml
+/BCD3/.idea/modules.xml
+/BCD3/.idea/workspace.xml
+/BCD3/protocol/climate_FI_Test.csv

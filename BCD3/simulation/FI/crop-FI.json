@@ -1,0 +1,43 @@
+  {
+	"__UNDERSCORES IN FRONT MEANS IGNORE THE KEY, this is just to keep a valid JSON file": "",
+	"__!!! check and beautify JSON files with http://codebeautify.org/jsonviewer !!!": "",
+	
+	"__this is the path which is prepended to 'include-from-file' paths, if they are relative paths": "",
+	"_include-file-base-path": "./",
+	
+
+	"crops": {
+		"SG": {
+			"is-winter-crop": false,
+			"cropParams": {
+				"species": ["include-from-file", "simulation/FI/crops/barley.json"],
+				"cultivar": ["include-from-file", "simulation/FI/crops/spring-barley-FI.json"]
+			},
+			"residueParams": ["include-from-file", "simulation/monica_parameters/crop-residues/barley.json"]
+		}
+	},
+
+	"cropRotation": [
+		{
+			"worksteps": [
+				{ "date": "0000-05-17", "type": "Tillage", "depth": [0.3, "m"] },
+				{ "date": "0000-05-20", "type": "Sowing", "crop": ["ref", "crops", "SG"] },
+				{
+				    "type": "AutomaticHarvest",
+    				"latest-date": "0000-09-15",
+    				"min-%-asw": 0,
+    				"max-%-asw": 100,
+    				"max-3d-precip-sum": 5,
+    				"max-curr-day-precip": 1,
+    				"harvest-time": "maturity"
+				}
+			]
+		}
+	],
+
+	"__general crop parameters for the monica model": "",
+	"CropParameters": {
+		"=": ["include-from-file", "simulation/monica_parameters/general/crop.json"],
+		"__enable_hourly_FvCB_photosynthesis__": false
+	}
+}

@@ -1,0 +1,75 @@
+{
+	"__define paths to crop.json, site.json and climate.csv, no path means read from directory where sim.json (THIS file) has been found; files names are abitrary": "",
+	"crop.json": "crop-FI.json",
+	"site.json": "site-FI.json",
+	"climate.csv": "",
+	"start-date": "1980-01-01",
+	"end-date": "1985-12-31",
+	"use-leap-years" : true,
+
+	"__options for reading the climate csv file, how many header lines to read, which separator to use and optional conversion of headers to internally known names": "",
+	"climate.csv-options": {
+		"__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
+		"no-of-climate-file-header-lines": 1,
+		"csv-separator": ",",
+		"header-to-acd-names": {
+			"srad": "globrad",
+			"w_date": "iso-date",
+			"rain": "precip"
+		}
+	},
+	
+	"__set to 'true' to enable debug outputs and also write 'inputs.json' file into output directory": "",
+	"debug?": true,
+
+	"__the include file base path to be used if no other value is in crop/site.json specified": "",
+	"include-file-base-path": "D:/Eigene Dateien specka/ZALF/devel/github/MACSUR_BCD/BCD3/",
+	
+	"__configuration options for the monica outputs": "",
+	"output": { 
+	  "write-file?": true,
+
+
+		"path-to-output": "out/",
+		"file-name": "out.csv",
+
+		"csv-options": {
+			"include-header-row": true,
+			"include-units-row": true,
+			"include-aggregation-rows": true,
+			"csv-separator": ","
+		},
+
+				
+		"events" : [
+
+			"crop", [
+				["Year", "LAST"],
+				["Yield", "LAST"]
+			]
+		]
+	},
+	
+	
+	"__SHOULDN'T BE CHANGED CURRENTLY, as monica assumes partly 20 layers and 10cm layer thickness": "",
+	"NumberOfLayers": 20,
+	"LayerThickness": [0.1, "m"],
+
+	"UseSecondaryYields": true,
+	"NitrogenResponseOn": true,
+	"WaterDeficitResponseOn": true,
+	"EmergenceMoistureControlOn": false,
+	"EmergenceFloodingControlOn": false,
+
+	"UseNMinMineralFertilisingMethod": true,
+	"NMinUserParams": { "min": 10, "max": 80, "delayInDays": 30 },
+	"NMinFertiliserPartition": ["include-from-file", "simulation/monica_parameters/mineral-fertilisers/AN.json"],
+	"_NMinFertiliserPartition": {
+		"id": "my AN",
+		"name": "my very own ammonium nitrate variant",
+		"Carbamid": 0,
+		"NH4": 0.5,
+		"NO3": 0.5
+	},
+	"JulianDayAutomaticFertilising": 89
+}

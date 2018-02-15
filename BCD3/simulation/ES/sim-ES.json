@@ -1,0 +1,84 @@
+{
+	"__define paths to crop.json, site.json and climate.csv, no path means read from directory where sim.json (THIS file) has been found; files names are abitrary": "",
+	"crop.json": "crop-ES.json",
+	"site.json": "site-ES.json",
+	"climate.csv": "",
+	"start-date": "1981-01-01",
+	"end-date": "2010-12-31",
+	"use-leap-years" : true,
+
+	"__options for reading the climate csv file, how many header lines to read, which separator to use and optional conversion of headers to internally known names": "",
+	"climate.csv-options": {
+		"__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
+		"no-of-climate-file-header-lines": 2,
+		"csv-separator": ",",
+		"header-to-acd-names": {
+			"srad": "globrad",
+			"w_date": "iso-date",
+			"rain": "precip"
+		}
+	},
+	
+	"__set to 'true' to enable debug outputs and also write 'inputs.json' file into output directory": "",
+	"debug?": true,
+
+	"__the include file base path to be used if no other value is in crop/site.json specified": "",
+	"include-file-base-path": "./",
+	
+	"__configuration options for the monica outputs": "",
+	"output": { 
+	  "write-file?": false,
+
+
+		"path-to-output": "results",
+		"file-name": "out.csv",
+
+		"csv-options": {
+			"include-header-row": true,
+			"include-units-row": true,
+			"include-aggregation-rows": true,
+			"csv-separator": ","
+		},
+
+				
+		"events" : [
+			"yearly", [
+				"Year",
+				["SOC", [1, 3, "AVG"], "FIRST"],
+				["SOC", [1, 3, "AVG"], "LAST"],
+				["Rh", "SUM"],
+				["NEP", "SUM"],
+				["Act_ET", "SUM"]
+			],
+			"crop", [
+				["Year", "LAST"],
+				"Crop",
+				["Date", "FIRST"],
+				["Date", "LAST"],
+				["SOC", [1, 3, "AVG"], "FIRST"],
+				["SOC", [1, 3, "AVG"], "LAST"],
+				["Rh", "SUM"],
+				["NEP", "SUM"],
+				["Yield", "LAST"],
+				["Act_ET", "SUM"],
+				["SecondaryYield", "LAST"]
+			]
+		]
+	},
+	
+	
+	"__SHOULDN'T BE CHANGED CURRENTLY, as monica assumes partly 20 layers and 10cm layer thickness": "",
+	"NumberOfLayers": 20,
+	"LayerThickness": [0.1, "m"],
+
+	"UseSecondaryYields": true,
+	"NitrogenResponseOn": true,
+	"WaterDeficitResponseOn": true,
+	"EmergenceMoistureControlOn": false,
+	"EmergenceFloodingControlOn": false,
+
+	"UseNMinMineralFertilisingMethod": true,
+	"NMinUserParams": { "min": 10, "max": 80, "delayInDays": 30 },
+	"NMinFertiliserPartition": ["include-from-file", "simulation/monica_parameters/mineral-fertilisers/AN.json"],
+	"JulianDayAutomaticFertilising": 89
+}
