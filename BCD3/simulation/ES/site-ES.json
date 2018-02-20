@@ -7,7 +7,7 @@
 	
 	"__site parameters object": "",
   "SiteParameters": {
-    "Latitude": 41.7,
+    "Latitude": 41.63,
     "Slope": 0.01,
     "HeightNN": [190 , "m"],
     "NDeposition": [20, "kg N ha-1 y-1"],
@@ -21,7 +21,7 @@
                 "Clay": 0.118,
                 "PermanentWiltingPoint": 0.05,
                 "FieldCapacity": 0.31,
-                "SoilBulkDensity": 1.45,
+                "SoilBulkDensity": 1450,
                 "SoilOrganicMatter": 0.9,
                 "pH": 8.5
 			}, 
@@ -32,7 +32,7 @@
                 "Clay": 0.11,
                 "PermanentWiltingPoint": 0.101,
                 "FieldCapacity": 0.235,
-                "SoilBulkDensity": 1.31,
+                "SoilBulkDensity": 1310,
                 "SoilOrganicMatter": 0.5,
                 "pH": 8.6
 			},
@@ -42,7 +42,7 @@
                 "Clay": 0.635,
                 "PermanentWiltingPoint": 0.35,
                 "FieldCapacity": 0.473,
-                "SoilBulkDensity": 1.45,
+                "SoilBulkDensity": 1450,
                 "SoilOrganicMatter": 1.2,
                 "pH": 8.5
 			},
@@ -52,7 +52,7 @@
                 "Clay": 0.635,
                 "PermanentWiltingPoint": 0.35,
                 "FieldCapacity": 0.473,
-                "SoilBulkDensity": 1.45,
+                "SoilBulkDensity": 1450,
                 "SoilOrganicMatter": 0.1,
                 "pH": 8.5
 			}

@@ -21,7 +21,7 @@
           "Clay": 0.469,
           "PermanentWiltingPoint": 0.22,
           "FieldCapacity": 0.40,
-          "SoilBulkDensity": 1.4,
+          "SoilBulkDensity": 1400,
           "SoilOrganicCarbon": 2.94,
           "pH": 6.35
       },
@@ -31,7 +31,7 @@
           "Clay": 0.8,
           "PermanentWiltingPoint": 0.22,
           "FieldCapacity": 0.4,
-          "SoilBulkDensity": 1.5,
+          "SoilBulkDensity": 1500,
           "SoilOrganicCarbon": 0.5,
           "pH": 6.4
       },
@@ -39,7 +39,7 @@
           "Thickness": [1.1, "m"],
           "Sand": 0.03,
           "Clay": 0.9,
-          "SoilBulkDensity": 1.5,
+          "SoilBulkDensity": 1500,
           "SoilOrganicCarbon": 0.3,
           "pH": 6.9
       }

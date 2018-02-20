@@ -10,7 +10,7 @@
 	"__options for reading the climate csv file, how many header lines to read, which separator to use and optional conversion of headers to internally known names": "",
 	"climate.csv-options": {
 		"__given the start and end date, monica will run just this time range, else the full time range given by supplied climate data": "",
-		"no-of-climate-file-header-lines": 2,
+		"no-of-climate-file-header-lines": 1,
 		"csv-separator": ",",
 		"header-to-acd-names": {
 			"srad": "globrad",
@@ -20,10 +20,10 @@
 	},
 	
 	"__set to 'true' to enable debug outputs and also write 'inputs.json' file into output directory": "",
-	"debug?": true,
+	"debug?": false,
 
 	"__the include file base path to be used if no other value is in crop/site.json specified": "",
-	"include-file-base-path": "./",
+	"include-file-base-path": "D:/Eigene Dateien specka/ZALF/devel/github/MACSUR_BCD/BCD3/",
 	
 	"__configuration options for the monica outputs": "",
 	"output": { 
@@ -42,27 +42,38 @@
 
 				
 		"events" : [
-			"yearly", [
-				"Year",
-				["SOC", [1, 3, "AVG"], "FIRST"],
-				["SOC", [1, 3, "AVG"], "LAST"],
-				["Rh", "SUM"],
-				["NEP", "SUM"],
-				["Act_ET", "SUM"]
-			],
-			"crop", [
+            "crop", [
 				["Year", "LAST"],
-				"Crop",
-				["Date", "FIRST"],
-				["Date", "LAST"],
-				["SOC", [1, 3, "AVG"], "FIRST"],
-				["SOC", [1, 3, "AVG"], "LAST"],
-				["Rh", "SUM"],
-				["NEP", "SUM"],
 				["Yield", "LAST"],
-				["Act_ET", "SUM"],
-				["SecondaryYield", "LAST"]
-			]
+                ["AbBiom|Biom-ma", "LAST"],
+                ["DOY|Mat", "LAST"],
+                ["LAI|MaxLAI", "MAX"],
+                ["NLeach|Nleac", "SUM"],
+                ["Recharge|WDrain", "SUM"],
+                ["AbBiomN|CroN-ma", "LAST"],
+                ["GrainN", "LAST"],
+                ["Act_ET|CumET", "SUM"],
+                ["NetNmin|Nmin", "SUM"],
+                ["NH3|Nvol", "SUM"],
+                ["Denit|Nden", "SUM"],
+                ["PASW",[1,15, "SUM"], "LAST"],
+                ["NO3",[1,15, "SUM"], "LAST"],
+                ["NH4",[1,15, "SUM"], "LAST"],
+                ["RunOff|PET", "SUM"],
+                ["Tra|Transp", "SUM"]
+			],
+			"anthesis", [
+              ["Year", "LAST"],
+				"AbBiom|Biom-an",
+                "DOY|Ant",
+                "AbBiomN|CroN-an"
+			],
+            "maturity", [
+              ["Year", "LAST"],
+              "AbBiom|Biom-ma",
+              "DOY|Mat",
+              "AbBiomN|CroN-ma"
+            ]
 		]
 	},
 	

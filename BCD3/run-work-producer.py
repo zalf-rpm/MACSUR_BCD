@@ -25,7 +25,7 @@ import monica_io
 #import ascii_io
 #from datetime import date, timedelta
 #import copy
-#import os
+import os
 #from collections import defaultdict
 
 #############################################################
@@ -41,23 +41,41 @@ PATHS = {
 temperature_response = {
     "FI": ["FI8110TM3", "FI8110TM2", "FI8110TM1", "FI8110TM0", "FI8110TA1",
            "FI8110TA2", "FI8110TA3", "FI8110TA4", "FI8110TA5", "FI8110TA6", "FI8110TA7"],
-    "ES": ["SP8110TM3", "SP8110TM2", "SP8110TM1", "SP8110TM0", "SP8110TA1",
-           "SP8110TA2", "SP8110TA3", "SP8110TA4", "SP8110TA5", "SP8110TA6", "ES8110TA7"]
+    "ES": ["SP8110TM03", "SP8110TM02", "SP8110TM01", "SP8110TM00", "SP8110TA01",
+           "SP8110TA02", "SP8110TA03", "SP8110TA04", "SP8110TA05", "SP8110TA06", "SP8110TA07"],
+    "CO2": [ 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 360]
 }
 
 precipitation_response = {
     "FI": ["FI8110PM20", "FI8110PM10", "FI8110PM05", "FI8110PA05", "FI8110PA10", "FI8110PA20"],
-    "ES": ["SP8110PM20", "SP8110PM10", "SP8110PM05", "SP8110PA05", "SP8110PA10", "SP8110PA20"]
+    "ES": ["SP8110PM20", "SP8110PM10", "SP8110PM05", "SP8110PA05", "SP8110PA10", "SP8110PA20"],
+    "CO2": [ 360, 360, 360, 360, 360, 360]
 }
 
 solar_radiation_response = {
     "FI": ["FI8110RM15", "FI8110RM10", "FI8110RM05", "FI8110RA05", "FI8110RA10", "FI8110RA15"],
-    "ES": ["SP8110RM15", "SP8110RM10", "SP8110RM05", "SP8110RA05", "SP8110RA10", "SP8110RA15"]
+    "ES": ["SP8110RM15", "SP8110RM10", "SP8110RM05", "SP8110RA05", "SP8110RA10", "SP8110RA15"],
+    "CO2": [ 360, 360, 360, 360, 360, 360]
 }
 
 co2_response = {
-    "FI": ["FI8110PM00"],
-    "ES": ["SP8110PM00"]
+    "FI": ["FI8010BS", "FI8010BS", "FI8010BS", "FI8010BS", "FI8010BS"],
+    "ES": ["SP8010BS", "SP8010BS", "SP8010BS", "SP8010BS", "SP8010BS"],
+    "CO2": [ 360, 450, 560, 640, 720]
+}
+
+interaction_response = {
+    "FI": ["FI8110IM01", "FI8110IM02", "FI8110IM03", "FI8110IM04", "FI8110IM05", "FI8110IM06", "FI8110IM07", "FI8110IM08"],
+    "ES": ["SP8110IM01", "SP8110IM02", "SP8110IM03", "SP8110IM04", "SP8110IM05", "SP8110IM06", "SP8110IM07", "SP8110IM08"],
+    "CO2": [ 450, 450, 450, 450, 560, 560, 560, 560]
+}
+
+climate_files = {
+    "T" : temperature_response,
+    "P" : precipitation_response,
+    "R" : solar_radiation_response,
+    "C" : co2_response,
+    "I" : interaction_response
 }
 
 #############################################################
@@ -66,7 +84,13 @@ co2_response = {
 
 def run_producer():
     "main function"
+    #site_name = "FI"
     site_name = "FI"
+
+    simulations = ["T", "P", "R", "C", "I"]
+    #simulations = ["I"]
+
+
     simulation_dir="simulation/" + site_name  + "/"
 
     context = zmq.Context()
@@ -88,57 +112,72 @@ def run_producer():
 
     socket.connect("tcp://" + config["server"] + ":" + str(config["port"]))
 
-    with open(simulation_dir + "sim-" + site_name + ".json") as _:
-        sim = json.load(_)
+    for sim_type in simulations:
 
-    with open(simulation_dir + "site-" + site_name + ".json") as _:
-        site = json.load(_)
+        c_files = climate_files[sim_type][site_name]
+        co2_values = climate_files[sim_type]["CO2"]
+        print c_files
 
-    with open(simulation_dir + "crop-" + site_name + ".json") as _:
-        crop = json.load(_)
+        for climate_file, co2 in zip(c_files, co2_values):
 
-    sim["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
+            output_file = "O" + os.path.splitext(os.path.basename(climate_file))[0] + ".txt"
 
-    sent_id = 0
-    start_send = time.clock()
+            if sim_type == "C":
+                output_file = "O" + os.path.splitext(os.path.basename(climate_file))[0] + str(co2) + ".txt"
 
-    env = monica_io.create_env_json_from_json_config({
-        "crop": crop,
-        "site": site,
-        "sim": sim,
-        "climate": ""
-    })
-    #monica_io.add_climate_data_to_env(env, sim)
 
-    env["csvViaHeaderOptions"] = sim["climate.csv-options"]
-    env["csvViaHeaderOptions"]["start-date"] = sim["start-date"]
-    env["csvViaHeaderOptions"]["end-date"] = sim["end-date"]
+            with open(simulation_dir + "sim-" + site_name + ".json") as _:
+                sim = json.load(_)
 
-    env["pathToClimateCSV"] = []
-    climate_path = paths["INCLUDE_FILE_BASE_PATH"] + simulation_dir + "climate_" + site_name + ".csv"
-    print(climate_path)
-    env["pathToClimateCSV"].append(climate_path)
+            with open(simulation_dir + "site-" + site_name + ".json") as _:
+                site = json.load(_)
 
-    env["params"]["userEnvironmentParameters"]["AtmosphericCO2"] = 360
+            with open(simulation_dir + "crop-" + site_name + ".json") as _:
+                crop = json.load(_)
 
-    env["customId"] = {
-        "id": "BCD3",
-        "site": site_name
-    }
+            sim["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
 
-        #{
-        #"id": "BCD3",
-        #"site_name": site_name
-    #}
+            sent_id = 0
+            start_send = time.clock()
 
-    socket.send_json(env)
+            env = monica_io.create_env_json_from_json_config({
+                "crop": crop,
+                "site": site,
+                "sim": sim,
+                "climate": ""
+            })
+            #monica_io.add_climate_data_to_env(env, sim)
 
-    print("sent env ", sent_id, " customId: ", env["customId"])
-    sent_id += 1
+            env["csvViaHeaderOptions"] = sim["climate.csv-options"]
+            env["csvViaHeaderOptions"]["start-date"] = sim["start-date"]
+            env["csvViaHeaderOptions"]["end-date"] = sim["end-date"]
 
-    stop_send = time.clock()
+            env["pathToClimateCSV"] = []
+            climate_path = paths["INCLUDE_FILE_BASE_PATH"] + simulation_dir + "climate/" + climate_file + ".csv"
+            print(climate_path)
+            env["pathToClimateCSV"].append(climate_path)
 
-    print("sending ", sent_id, " envs took ", (stop_send - start_send), " seconds")
+            env["params"]["userEnvironmentParameters"]["AtmosphericCO2"] = co2
+
+            env["customId"] = {
+                "id": "BCD3",
+                "site": site_name,
+                "output_filename": output_file
+            }
+
+                #{
+                #"id": "BCD3",
+                #"site_name": site_name
+            #}
+
+            socket.send_json(env)
+
+            print("sent env ", sent_id, " customId: ", env["customId"])
+            sent_id += 1
+
+        stop_send = time.clock()
+
+        print("sending ", sent_id, " envs took ", (stop_send - start_send), " seconds")
 
 
 if __name__ == "__main__":

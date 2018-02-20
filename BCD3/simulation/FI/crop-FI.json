@@ -24,7 +24,7 @@
 				{ "date": "0000-05-20", "type": "Sowing", "crop": ["ref", "crops", "SG"] },
 				{
 				    "type": "AutomaticHarvest",
-    				"latest-date": "0000-09-15",
+    				"latest-date": "0000-10-31",
     				"min-%-asw": 0,
     				"max-%-asw": 100,
     				"max-3d-precip-sum": 5,
