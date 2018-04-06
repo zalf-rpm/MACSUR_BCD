@@ -70,13 +70,46 @@ interaction_response = {
     "CO2": [ 450, 450, 450, 450, 560, 560, 560, 560]
 }
 
+future_scenarios = {
+    "FI": ["ACCESS", "CM3", "CM5A", "EARTH", "EMS", "ESM", "GISS", "HADGEM"],
+    "ES": ["ACCESS", "CM3", "CM5A", "EARTH", "EMS", "ESM", "GISS", "HADGEM"],
+    "CO2": [560, 560, 560, 560, 560, 560, 560, 560 ]
+}
+
+
 climate_files = {
     "T" : temperature_response,
     "P" : precipitation_response,
     "R" : solar_radiation_response,
     "C" : co2_response,
-    "I" : interaction_response
+    "I" : interaction_response,
+    "F" : future_scenarios
 }
+
+timeframes = {
+    "FI" : {
+        "ACCESS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "CM3": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "CM5A": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "EARTH": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "EMS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "ESM": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "GISS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "HADGEM": {"start-date": "2040-01-01", "end-date": "2070-12-31"}
+    },
+    "ES": {
+        "ACCESS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "CM3": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "CM5A": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "EARTH": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "EMS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "ESM": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "GISS": {"start-date": "2040-01-01", "end-date": "2070-12-31"},
+        "HADGEM": {"start-date": "2040-01-01", "end-date": "2070-12-31"}
+    }
+}
+
+
 
 #############################################################
 #############################################################
@@ -87,9 +120,7 @@ def run_producer():
     #site_name = "FI"
     site_name = "FI"
 
-    simulations = ["T", "P", "R", "C", "I"]
-    #simulations = ["I"]
-
+    simulations = ["F"]
 
     simulation_dir="simulation/" + site_name  + "/"
 
@@ -114,6 +145,7 @@ def run_producer():
 
     for sim_type in simulations:
 
+
         c_files = climate_files[sim_type][site_name]
         co2_values = climate_files[sim_type]["CO2"]
         print c_files
@@ -124,6 +156,11 @@ def run_producer():
 
             if sim_type == "C":
                 output_file = "O" + os.path.splitext(os.path.basename(climate_file))[0] + str(co2) + ".txt"
+
+            if sim_type == "F":
+                output_file = "MO_FU2050_YR_" + os.path.splitext(os.path.basename(climate_file))[0] + "_" + site_name + ".txt"
+
+
 
 
             with open(simulation_dir + "sim-" + site_name + ".json") as _:
@@ -136,6 +173,10 @@ def run_producer():
                 crop = json.load(_)
 
             sim["include-file-base-path"] = paths["INCLUDE_FILE_BASE_PATH"]
+
+            if sim_type == "F":
+                sim["start-date"] = timeframes[site_name][climate_file]["start-date"]
+                sim["end-date"] = timeframes[site_name][climate_file]["end-date"]
 
             sent_id = 0
             start_send = time.clock()

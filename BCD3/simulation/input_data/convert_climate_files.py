@@ -25,7 +25,7 @@ def main():
         
     site = "FI"
 
-    climate_dir = site + "/climate"
+    climate_dir = site + "/scenarios"
     original_files = getFilesInDirectory(climate_dir)
 
     # create function pointer for parsing the date column

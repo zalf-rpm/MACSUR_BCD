@@ -108,7 +108,7 @@ def write_bcd_output_file(result):
     site_name = custom_id["site"]
     print ("Received results from %s" % custom_id["output_filename"])
 
-    with open("out/2018-02-19/" + custom_id["output_filename"], 'wb') as fp:
+    with open("out/2018-04-06/" + custom_id["output_filename"], 'wb') as fp:
         writer = csv.writer(fp, delimiter="\t")
         writer.writerow(["BCD3_2017"])
         writer.writerow(["Model: MO"])
@@ -169,7 +169,7 @@ def create_output_rows(result_map):
 
     rows = []
 
-    for year in result_map.keys():
+    for year in sorted(result_map.keys()):
 
         values = result_map[year]
 
